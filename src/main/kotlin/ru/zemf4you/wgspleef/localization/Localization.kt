@@ -77,8 +77,8 @@ class Localization(private val plugin: SpleefPlugin, val lang: String = "ru") {
         val header = config.getMessage("players.header")
         val player = config.getMessage("players.player")
         val separator = config.getMessage("players.separator")
-        fun getPlayers(game: Arena) = header.template(game) +
-                game.players.joinToString(separator) {
+        fun getPlayers(arena: Arena) = header +
+                arena.players.joinToString(separator) {
                     player.template("player" to it.name)
                 }
     }
@@ -86,6 +86,8 @@ class Localization(private val plugin: SpleefPlugin, val lang: String = "ru") {
     val start: String
     val wait: String
     val reload: String
+    val noPermission: String
+    val playerOnly: String
     val illegalCommand: String
 
     init {
@@ -99,6 +101,8 @@ class Localization(private val plugin: SpleefPlugin, val lang: String = "ru") {
             this.start = config.getMessage("start")
             this.wait = config.getMessage("wait")
             this.reload = config.getMessage("reload")
+            this.noPermission = config.getMessage("noPermission")
+            this.playerOnly = config.getMessage("playerOnly")
             this.illegalCommand = config.getMessage("illegalCommand")
         } catch (e: Throwable) {
             throw InvalidLocalization(e.message)

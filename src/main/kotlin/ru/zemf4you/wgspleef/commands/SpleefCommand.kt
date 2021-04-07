@@ -7,6 +7,8 @@ import org.bukkit.entity.Player
 import ru.zemf4you.wgspleef.SpleefPlugin
 import ru.zemf4you.wgspleef.localization.Localization
 import ru.zemf4you.wgspleef.localization.Localization.Companion.template
+import ru.zemf4you.wgspleef.permissions.PermissionsManager.isSpleefAdmin
+import ru.zemf4you.wgspleef.permissions.PermissionsManager.isSpleefPlayer
 
 class SpleefCommand(private val plugin: SpleefPlugin) : CommandExecutor {
 
@@ -18,53 +20,85 @@ class SpleefCommand(private val plugin: SpleefPlugin) : CommandExecutor {
             1 -> {
                 when (args[0].toLowerCase()) {
                     "join" -> {
-                        if (sender !is Player)
-                            return true
                         sender.sendMessage(
-                            plugin.arenaManager.findBestArena()?.join(sender)
-                                ?: locale.arenas.notEnough
+                            when {
+                                sender !is Player -> locale.playerOnly
+                                sender.isSpleefPlayer ->
+                                    plugin.arenaManager.findBestArena()?.join(sender)
+                                        ?: locale.arenas.notEnough
+                                else -> locale.noPermission
+                            }
                         )
                         return true
                     }
                     "leave" -> {
-                        if (sender !is Player)
-                            return true
                         sender.sendMessage(
-                            plugin.arenaManager.findArena(sender)?.leave(sender)
-                                ?: locale.leave.notIn
+                            when {
+                                sender !is Player -> locale.playerOnly
+                                sender.isSpleefPlayer ->
+                                    plugin.arenaManager.findArena(sender)?.leave(sender)
+                                        ?: locale.leave.notIn
+                                else -> locale.noPermission
+                            }
                         )
                         return true
                     }
                     "list" -> {
-                        sender.sendMessage(locale.arenas.getArenas())
+                        sender.sendMessage(
+                            when {
+                                sender.isSpleefPlayer -> locale.arenas.getArenas()
+                                else -> locale.noPermission
+                            }
+                        )
                         return true
                     }
                     "reload" -> {
-                        // TODO:
-                        //  create PermissionsManager
-                        /*
-                        sender.sendMessage(plugin.reload())
+                        sender.sendMessage(
+                            when {
+                                sender.isSpleefAdmin -> plugin.reload()
+                                else -> locale.noPermission
+                            }
+                        )
                         return true
-                        */
                     }
                 }
             }
             2 -> {
-                val region = args[1]
+                val regionName = args[1]
                 when (args[0].toLowerCase()) {
                     "players" -> {
-                        sender.sendMessage(when (val game = plugin.arenaManager.findArena(region)) {
-                            null -> locale.arenas.notExist.template("arena" to region)
-                            else -> locale.players.getPlayers(game)
-                        })
+                        sender.sendMessage(
+                            when {
+                                sender.isSpleefPlayer -> {
+                                    when (val arena = plugin.arenaManager.findArena(regionName)) {
+                                        null -> locale.arenas.notExist.template(
+                                            mapOf(
+                                                "arena" to regionName,
+                                                "region" to regionName
+                                            )
+                                        )
+                                        else -> locale.players.getPlayers(arena)
+                                    }
+                                }
+                                else -> locale.noPermission
+                            }
+                        )
                         return true
                     }
                     "join" -> {
-                        if (sender !is Player)
-                            return true
                         sender.sendMessage(
-                            plugin.arenaManager.findArena(region)?.join(sender)
-                                ?: locale.arenas.notExist.template("arena" to region)
+                            when {
+                                sender !is Player -> locale.playerOnly
+                                sender.isSpleefPlayer ->
+                                    plugin.arenaManager.findArena(regionName)?.join(sender)
+                                        ?: locale.arenas.notExist.template(
+                                            mapOf(
+                                                "arena" to regionName,
+                                                "region" to regionName
+                                            )
+                                        )
+                                else -> locale.noPermission
+                            }
                         )
                         return true
                     }
@@ -74,9 +108,18 @@ class SpleefCommand(private val plugin: SpleefPlugin) : CommandExecutor {
                 }
             }
         }
-        // TODO:
-        //  Permission to admin help
-        sender.sendMessage(locale.help.user)
+        sender.sendMessage(
+            when (sender) {
+                is Player -> {
+                    when {
+                        sender.isSpleefAdmin -> locale.help.admin
+                        sender.isSpleefPlayer -> locale.help.user
+                        else -> locale.noPermission
+                    }
+                }
+                else -> locale.help.admin
+            }
+        )
         return true
     }
 }

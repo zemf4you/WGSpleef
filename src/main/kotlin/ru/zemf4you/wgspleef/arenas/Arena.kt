@@ -6,7 +6,7 @@ import org.bukkit.block.Block
 import org.bukkit.entity.Player
 import ru.zemf4you.wgspleef.Dependencies
 import ru.zemf4you.wgspleef.SpleefPlugin
-import ru.zemf4you.wgspleef.events.Events
+import ru.zemf4you.wgspleef.events.EventsManager
 import ru.zemf4you.wgspleef.events.SpleefPlayerWinEvent
 import ru.zemf4you.wgspleef.events.SpleefStartEvent
 import ru.zemf4you.wgspleef.events.SpleefStopEvent
@@ -36,7 +36,7 @@ class Arena(private val plugin: SpleefPlugin, val params: ArenaParams) {
     private var task = {
         if (free) {
             if (players.size >= params.minPlayers) {
-                broadcast(locale.wait.template(this@Arena).template("remain" to cd.toString()))
+                broadcast(locale.wait.template(this@Arena))
                 cd--
                 if (cd == 0) {
                     start()
@@ -71,7 +71,7 @@ class Arena(private val plugin: SpleefPlugin, val params: ArenaParams) {
         if (!free)
             return false
         free = false
-        Events.callEvent(SpleefStartEvent(this))
+        EventsManager.call(SpleefStartEvent(this))
         return true
     }
 
@@ -81,7 +81,7 @@ class Arena(private val plugin: SpleefPlugin, val params: ArenaParams) {
         free = true
         players.clear()
         restoreBlocks()
-        Events.callEvent(SpleefStopEvent(this))
+        EventsManager.call(SpleefStopEvent(this))
         return true
     }
 
@@ -115,7 +115,7 @@ class Arena(private val plugin: SpleefPlugin, val params: ArenaParams) {
         if (player !in players)
             return null
         Dependencies.vaultEconomy?.depositPlayer(player, params.winAmount)
-        Events.callEvent(SpleefPlayerWinEvent(this, player))
+        EventsManager.call(SpleefPlayerWinEvent(this, player))
         stop()
         return locale.end.win.template(this)
     }
