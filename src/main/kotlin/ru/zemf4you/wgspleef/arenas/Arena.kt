@@ -12,7 +12,6 @@ import ru.zemf4you.wgspleef.events.SpleefStartEvent
 import ru.zemf4you.wgspleef.events.SpleefStopEvent
 import ru.zemf4you.wgspleef.localization.Localization
 import ru.zemf4you.wgspleef.localization.Localization.Companion.template
-import ru.zemf4you.wgspleef.players.ArenaPlayers
 import ru.zemf4you.wgspleef.worldguard.Regions
 
 class Arena(private val plugin: SpleefPlugin, val params: ArenaParams) {

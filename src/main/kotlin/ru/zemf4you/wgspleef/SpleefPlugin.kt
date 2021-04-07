@@ -2,13 +2,12 @@
 
 package ru.zemf4you.wgspleef
 
-import com.sk89q.worldguard.bukkit.WorldGuardPlugin
 import org.bukkit.Bukkit
 import org.bukkit.plugin.java.JavaPlugin
+import ru.zemf4you.wgspleef.arenas.ArenaManager
 import ru.zemf4you.wgspleef.commands.SpleefCommand
 import ru.zemf4you.wgspleef.configs.Config
 import ru.zemf4you.wgspleef.events.EventListener
-import ru.zemf4you.wgspleef.arenas.ArenaManager
 import ru.zemf4you.wgspleef.localization.Localization
 
 

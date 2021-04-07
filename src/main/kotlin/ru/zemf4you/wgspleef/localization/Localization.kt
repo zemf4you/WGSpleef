@@ -5,8 +5,8 @@ package ru.zemf4you.wgspleef.localization
 import org.bukkit.ChatColor
 import org.bukkit.entity.Player
 import ru.zemf4you.wgspleef.SpleefPlugin
-import ru.zemf4you.wgspleef.configs.Config
 import ru.zemf4you.wgspleef.arenas.Arena
+import ru.zemf4you.wgspleef.configs.Config
 
 class Localization(private val plugin: SpleefPlugin, val lang: String = "ru") {
 

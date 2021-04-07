@@ -1,15 +1,14 @@
-package ru.zemf4you.wgspleef.players
+package ru.zemf4you.wgspleef.arenas
 
 import org.bukkit.entity.Player
 import ru.zemf4you.wgspleef.Util.cast
-import ru.zemf4you.wgspleef.arenas.Arena
 import ru.zemf4you.wgspleef.events.EventsManager
 import ru.zemf4you.wgspleef.events.SpleefPlayerJoinEvent
 import ru.zemf4you.wgspleef.events.SpleefPlayerLeaveEvent
+import ru.zemf4you.wgspleef.players.attributes.DefaultPlayerAttributes
 import ru.zemf4you.wgspleef.players.attributes.PlayerAttributesManager.restore
 import ru.zemf4you.wgspleef.players.attributes.PlayerAttributesManager.save
 import ru.zemf4you.wgspleef.players.attributes.PlayerAttributesManager.setAttributes
-import ru.zemf4you.wgspleef.players.attributes.DefaultPlayerAttributes
 
 class ArenaPlayers(private val arena: Arena): ArrayList<Player>() {
     override fun add(element: Player): Boolean {

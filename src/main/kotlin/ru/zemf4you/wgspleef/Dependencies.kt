@@ -1,8 +1,8 @@
 package ru.zemf4you.wgspleef
 
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin
-import org.bukkit.Bukkit
 import net.milkbowl.vault.economy.Economy
+import org.bukkit.Bukkit
 
 
 object Dependencies {
