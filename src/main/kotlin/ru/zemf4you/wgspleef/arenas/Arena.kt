@@ -46,9 +46,9 @@ class Arena(private val plugin: SpleefPlugin, val params: ArenaParams) {
                 resetCd()
             }
             // Fix minecraft bug
-            for (player in players)
-                if (player.location.y < params.startLocation.y)
-                    player.teleport(params.startLocation)
+//            for (player in players)
+//                if (player.location.y < params.startLocation.y)
+//                    player.teleport(params.startLocation)
         } else {
             for (player in players.clone())  // just copy
                 if (params.regionName !in Regions.getRegionsName(player))
