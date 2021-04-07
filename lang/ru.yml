@@ -1,0 +1,54 @@
+help:
+  admin: |-
+    &c&l-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+    &cКоманды&8:
+    &e  /spleef join [arena] &8-&e участвовать в сплифе
+    &e  /spleef leave &8-&e не участвовать в сплифе
+    &e  /spleef players <arena> &8-&e количество участников сплифа
+    &e  /spleef (list/arenas) &8-&e доступные арены
+    &c&l-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+    &cДля Админа&8:
+    &e  /spleef reload &8-&e перезагрузить конфиги
+    &e  /spleef add <arena> [params] &8-&e создать арену (в разработке)
+    &e  /spleef remove <arena> &8-&e удалить арену (в разработке)
+    &c&l-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+  user: |-
+    &c&l-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+    &cКоманды&8:
+    &e  /spleef join [arena] &8-&e участвовать в сплифе
+    &e  /spleef leave &8-&e не участвовать в сплифе
+    &e  /spleef players <arena> &8-&e количество участников сплифа
+    &e  /spleef (list/arenas) &8-&e доступные арены
+    &c&l-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+join:
+  alreadyIn: "&8[&cSpleef&8] &eВы уже на арене &c$arena&e!"
+  success: "&8[&cSpleef&8] &eВы присоединились к арене &c$arena&e. Игроков&8: &c$players&8/&c$max"
+leave:
+  notIn: "&8[&cSpleef&8] &eВы не участвуете в сплифе!"
+  success: "&8[&cSpleef&8] &eВы изгнаны из сплиф-кружка"
+arenas:
+  notExist: "&8[&cSpleef&8] &eАрены &c$arena &eне существует!"
+  notEnough: "&8[&cSpleef&8] &eВсе существующие арены заполнены!"
+  full: "&8[&cSpleef&8] &eНа арене &c$arena &eмаксимальное количество игроков &8(&cplayers/&cmax&8)"
+  header: "&8[&cSpleef&8] &eАрены &8(&c$freeArenasCount&8/&c$arenasCount&8):\n"
+  arena: "&8- &c$arena &8(&c$players&8/&c$max&8)"
+  freeArena: "&8- &e$arena &8(&a$players&8/&a$max&8)"
+  separator: "\n"
+end:
+  lose: |-
+    &8[&cSpleef&8] &eВы проиграли!
+    &eПопытаете удачу снова?
+    &c/spleef join
+  win: "&8[&cSpleef&8] &eВы победили! На ваш баланс зачислено &c$amount$"
+players:
+  notEnough: "&8[&cSpleef&8] &eНедостаточно игроков для начала игры!"
+  header: "&8[&cSpleef&8] &eИгроки на арене &c$arena &8(&c$players&8/&c$max&8):\n"
+  player: "&e- &c$player"
+  separator: "\n"
+wait: "&8[&cSpleef&8] &c$remain&e..."
+start: "&8[&cSpleef&8] &eИгра началась!"
+reload: "&8[&cSpleef&8] &eКонфиги успешно перезагружены!"
+illegalCommand: |-
+  &8[&cSpleef&8] &eВы не можете использовать команды во время игры!
+  &eЧтобы выйти из игры, введите
+  &c/spleef leave

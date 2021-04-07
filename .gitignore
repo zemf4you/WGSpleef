@@ -1,0 +1,6 @@
+*.iml
+out
+target
+.idea
+*.sh
+src/main/resources
