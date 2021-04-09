@@ -1,0 +1,5 @@
+<application>
+  <component name="NotificationConfiguration">
+    <notification groupId="Key Promoter X" displayType="STICKY_BALLOON" />
+  </component>
+</application>
