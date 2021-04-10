@@ -7,6 +7,7 @@ import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 import ru.zemf4you.wgspleef.SpleefPlugin
+import ru.zemf4you.wgspleef.Util.isPatternFor
 import ru.zemf4you.wgspleef.localization.Localization
 import ru.zemf4you.wgspleef.localization.Localization.Companion.template
 import ru.zemf4you.wgspleef.permissions.PermissionsManager.isSpleefAdmin
@@ -17,7 +18,8 @@ class SpleefCommand(private val plugin: SpleefPlugin) : CommandExecutor {
         get() = plugin.localization
 
     @Suppress("RemoveExplicitTypeArguments")
-    val commands = mapOf(
+    val commands = arrayOf(
+        arrayOf<String?>("join") to ::join,
         arrayOf<String?>("join", null) to ::join,
         arrayOf<String?>("leave") to ::leave,
         arrayOf<String?>("list") to ::list,
@@ -26,26 +28,19 @@ class SpleefCommand(private val plugin: SpleefPlugin) : CommandExecutor {
     )
 
     private fun executeCommand(sender: CommandSender, args: Array<String>): String {
-        commands.filter { it.key.size >= args.size }.forEach { (template, function) ->
-            for ((i, arg) in args.withIndex()) {
-                if (template[i] != null && template[i] != arg)
-                    continue
-                return function.invoke(sender, args.drop(0).toTypedArray())
-            }
-        }
-        return help(sender)
+        return commands.find { it.first.isPatternFor(args) }?.second?.invoke(sender, args) ?: help(sender)
     }
 
-    fun join(sender: CommandSender, args: Array<String>): String {
-        return when (args.size) {
-            0 -> {
+    private fun join(sender: CommandSender, args: Array<String>): String {
+        return when {
+            args.isEmpty() -> {
                 when (sender) {
                     !is Player -> locale.playerOnly
                     else -> plugin.arenaManager.findBestArena()?.join(sender)
                         ?: locale.arenas.notEnough
                 }
             }
-            1 -> {
+            else -> {
                 val regionName = args[0]
                 when (sender) {
                     !is Player -> locale.playerOnly
@@ -58,12 +53,11 @@ class SpleefCommand(private val plugin: SpleefPlugin) : CommandExecutor {
                         )
                 }
             }
-            else -> "Can not be"
         }
 
     }
 
-    fun leave(sender: CommandSender, args: Array<String>): String {
+    private fun leave(sender: CommandSender, args: Array<String>): String {
         return when (sender) {
             !is Player -> locale.playerOnly
             else -> plugin.arenaManager.findArena(sender)?.leave(sender)
@@ -71,11 +65,11 @@ class SpleefCommand(private val plugin: SpleefPlugin) : CommandExecutor {
         }
     }
 
-    fun list(sender: CommandSender, args: Array<String>): String {
+    private fun list(sender: CommandSender, args: Array<String>): String {
         return locale.arenas.getArenas()
     }
 
-    fun players(sender: CommandSender, args: Array<String>): String {
+    private fun players(sender: CommandSender, args: Array<String>): String {
         val regionName = args[0]
         return when (val arena = plugin.arenaManager.findArena(regionName)) {
             null -> locale.arenas.notExist.template(
@@ -88,14 +82,14 @@ class SpleefCommand(private val plugin: SpleefPlugin) : CommandExecutor {
         }
     }
 
-    fun reload(sender: CommandSender, args: Array<String>): String {
+    private fun reload(sender: CommandSender, args: Array<String>): String {
         return when {
             sender.isSpleefAdmin -> plugin.reload()
             else -> locale.noPermission
         }
     }
 
-    fun help(sender: CommandSender): String {
+    private fun help(sender: CommandSender): String {
         return when {
             sender.isSpleefAdmin -> locale.help.admin
             else -> locale.help.user
