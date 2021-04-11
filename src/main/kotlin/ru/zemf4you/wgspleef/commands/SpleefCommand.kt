@@ -22,7 +22,8 @@ class SpleefCommand(private val plugin: SpleefPlugin) : CommandExecutor {
         arrayOf<String?>("join") to ::join,
         arrayOf<String?>("join", null) to ::join,
         arrayOf<String?>("leave") to ::leave,
-        arrayOf<String?>("list") to ::list,
+        arrayOf<String?>("arenas") to ::arenas,
+        arrayOf<String?>("list") to ::arenas,
         arrayOf<String?>("players", null) to ::players,
         arrayOf<String?>("reload") to ::reload,
     )
@@ -35,21 +36,19 @@ class SpleefCommand(private val plugin: SpleefPlugin) : CommandExecutor {
         return when {
             args.isEmpty() -> {
                 when (sender) {
-                    !is Player -> locale.playerOnly
+                    !is Player -> locale.stuff.playersOnly
                     else -> plugin.arenaManager.findBestArena()?.join(sender)
-                        ?: locale.arenas.notEnough
+                        ?: locale.commands.player.join.fail.allArenasAreFull
                 }
             }
             else -> {
                 val regionName = args[0]
                 when (sender) {
-                    !is Player -> locale.playerOnly
+                    !is Player -> locale.stuff.playersOnly
                     else -> plugin.arenaManager.findArena(regionName)?.join(sender)
-                        ?: locale.arenas.notExist.template(
-                            mapOf(
-                                "arena" to regionName,
-                                "region" to regionName
-                            )
+                        ?: locale.commands.player.join.fail.arenaIsNotExist.template(
+                            "arena" to regionName,
+                            "region" to regionName
                         )
                 }
             }
@@ -59,40 +58,39 @@ class SpleefCommand(private val plugin: SpleefPlugin) : CommandExecutor {
 
     private fun leave(sender: CommandSender, args: Array<String>): String {
         return when (sender) {
-            !is Player -> locale.playerOnly
+            !is Player -> locale.stuff.playersOnly
             else -> plugin.arenaManager.findArena(sender)?.leave(sender)
-                ?: locale.leave.notIn
+                ?: locale.commands.player.leave.fail.notIn
         }
     }
 
-    private fun list(sender: CommandSender, args: Array<String>): String {
-        return locale.arenas.getArenas()
+    private fun arenas(sender: CommandSender, args: Array<String>): String {
+        return locale.commands.general.arenas.toString()
     }
 
     private fun players(sender: CommandSender, args: Array<String>): String {
         val regionName = args[0]
         return when (val arena = plugin.arenaManager.findArena(regionName)) {
-            null -> locale.arenas.notExist.template(
-                mapOf(
+            null -> locale.commands.general.players.fail.arenaIsNotExist.template(
                     "arena" to regionName,
                     "region" to regionName
-                )
             )
-            else -> locale.players.getPlayers(arena)
+            else -> locale.commands.general.players.toString(arena)
         }
     }
 
     private fun reload(sender: CommandSender, args: Array<String>): String {
         return when {
             sender.isSpleefAdmin -> plugin.reload()
-            else -> locale.noPermission
+            else -> locale.stuff.noPermission
         }
     }
 
     private fun help(sender: CommandSender): String {
         return when {
-            sender.isSpleefAdmin -> locale.help.admin
-            else -> locale.help.user
+            sender !is Player -> locale.commands.general.help.console
+            sender.isSpleefAdmin -> locale.commands.general.help.admin
+            else -> locale.commands.general.help.player
         }
     }
 

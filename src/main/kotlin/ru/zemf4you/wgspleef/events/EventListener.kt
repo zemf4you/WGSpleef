@@ -68,7 +68,7 @@ class EventListener(private val plugin: SpleefPlugin) : Listener {
             return
         plugin.arenaManager.findArena(event.player)?.let { arena ->
             event.isCancelled = true
-            event.player.sendMessage(plugin.localization.illegalCommand.template(arena))
+            event.player.sendMessage(plugin.localization.stuff.unavailableCommand.template(arena))
         }
     }
 

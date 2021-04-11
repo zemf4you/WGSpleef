@@ -2,14 +2,14 @@ lang: ru
 arenas:
   spleef:
     world: world
-    minPlayers: 3
-    maxPlayers: 10
+    minPlayersCount: 3
+    maxPlayersCount: 10
     startCoords:
       x: 1294.5
       y: 97
       z: -377.5
     blockToBreak: SNOW_BLOCK
     startItem: DIAMOND_SPADE
-    startCd: 10
-    startCdReset: false
-    winAmount: 50
+    startCountdown: 10
+    startCountdownReset: false
+    reward: 50

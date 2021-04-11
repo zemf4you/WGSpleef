@@ -37,6 +37,6 @@ class ArenaManager(private val plugin: SpleefPlugin) {
         arenas.find { player in it }
 
     fun findBestArena() =
-        freeArenas.sortedByDescending { it.players.size }.minByOrNull { it.params.minPlayers - it.players.size }
+        freeArenas.sortedByDescending { it.players.size }.minByOrNull { it.params.minPlayersCount - it.players.size }
 
 }
