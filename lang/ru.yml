@@ -24,7 +24,7 @@ commands:
         &cКоманды&8:
         &e  /spleef join [arena] &8-&e участвовать в сплифе
         &e  /spleef leave &8-&e не участвовать в сплифе
-        &e  /spleef players <arena> &8-&e количество участников сплифа
+        &e  /spleef players [arena] &8-&e количество участников сплифа
         &e  /spleef (list/arenas) &8-&e доступные арены
         &c&l-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
       admin: |-
@@ -32,7 +32,7 @@ commands:
         &cКоманды&8:
         &e  /spleef join [arena] &8-&e участвовать в сплифе
         &e  /spleef leave &8-&e не участвовать в сплифе
-        &e  /spleef players <arena> &8-&e количество участников сплифа
+        &e  /spleef players [arena] &8-&e количество участников сплифа
         &e  /spleef (list/arenas) &8-&e доступные арены
         &c&l-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
         &cДля Админа&8:
