@@ -24,6 +24,7 @@ class SpleefCommand(private val plugin: SpleefPlugin) : CommandExecutor {
         arrayOf<String?>("leave") to ::leave,
         arrayOf<String?>("arenas") to ::arenas,
         arrayOf<String?>("list") to ::arenas,
+        arrayOf<String?>("players") to ::players,
         arrayOf<String?>("players", null) to ::players,
         arrayOf<String?>("reload") to ::reload,
     )
@@ -68,14 +69,25 @@ class SpleefCommand(private val plugin: SpleefPlugin) : CommandExecutor {
         return locale.commands.general.arenas.toString()
     }
 
-    private fun players(sender: CommandSender, args: Array<String>): String {
-        val regionName = args[0]
-        return when (val arena = plugin.arenaManager.findArena(regionName)) {
-            null -> locale.commands.general.players.fail.arenaIsNotExist.template(
-                    "arena" to regionName,
-                    "region" to regionName
-            )
-            else -> locale.commands.general.players.toString(arena)
+    private fun players(sender: CommandSender, args: Array<String>): String? {
+        return when {
+            args.isEmpty() -> {
+                when (sender) {
+                    !is Player -> locale.stuff.playersOnly
+                    else -> plugin.arenaManager.findArena(sender)
+                        ?.let { arena -> locale.commands.general.players.toString(arena) }
+                }
+            }
+            else -> {
+                val regionName = args[0]
+                when (val arena = plugin.arenaManager.findArena(regionName)) {
+                    null -> locale.commands.general.players.fail.arenaIsNotExist.template(
+                        "arena" to regionName,
+                        "region" to regionName
+                    )
+                    else -> locale.commands.general.players.toString(arena)
+                }
+            }
         }
     }
 
