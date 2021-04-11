@@ -36,17 +36,17 @@ lang: ru  # Язык локализации. Конфиг с таким имен
 arenas:
   spleef:  # Название защищённого региона WorldGuard. Количество арен не ограничено
     world: world  # Название мира, в котором находится арена
-    minPlayers: 3  # Минимальное количество игроков для начала игры (не менее 2)
-    maxPlayers: 10  # Максимальное количество игроков на арене
+    minPlayersCount: 3  # Минимальное количество игроков для начала игры (не менее 2)
+    maxPlayersCount: 10  # Максимальное количество игроков на арене
     startCoords:  # Координаты, на которые телепортируются игроки при перемещении на арену
       x: 1294.5
       y: 97
       z: -377.5
     blockToBreak: SNOW_BLOCK  # Тип блока, который могут разрушать игроки
     startItem: DIAMOND_SPADE  # Тип блока/предмета, который получает игрок при перемещении на арену
-    startCd: 10  # Обратный отсчёт перед стартом игры (в секундах)
-    startCdReset: false  # Сбрасывать ли обратный отсчёт при подключении новых игроков
-    winAmount: 50.0  # Сумма денежного приза для победителя
+    startCountdown: 10  # Обратный отсчёт перед стартом игры (в секундах)
+    startCountdownReset: false  # Сбрасывать ли обратный отсчёт при подключении новых игроков
+    reward: 50.0  # Сумма денежного приза для победителя
 ```
 *Примечание*: типы блоков и предметов могут быть найдены [в официальной документации spigot](https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html).
 
@@ -54,87 +54,121 @@ arenas:
 #### lang.yml
 В данном примере используется русский язык. В названии конфига следует указывать используемый язык (в конкретном случае файл надо назвать **ru.yml**). Конфиг должен располагаться в директории lang.
 ```yaml
-help:
-  admin: |-
-    &c&l-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
-    &cКоманды&8:
-    &e  /spleef join [arena] &8-&e участвовать в сплифе
-    &e  /spleef leave &8-&e не участвовать в сплифе
-    &e  /spleef players <arena> &8-&e количество участников сплифа
-    &e  /spleef (list/arenas) &8-&e доступные арены
-    &c&l-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
-    &cДля Админа&8:
-    &e  /spleef reload &8-&e перезагрузить конфиги
-    &e  /spleef add <arena> [params] &8-&e создать арену (в разработке)
-    &e  /spleef remove <arena> &8-&e удалить арену (в разработке)
-    &c&l-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
-  user: |-
-    &c&l-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
-    &cКоманды&8:
-    &e  /spleef join [arena] &8-&e участвовать в сплифе
-    &e  /spleef leave &8-&e не участвовать в сплифе
-    &e  /spleef players <arena> &8-&e количество участников сплифа
-    &e  /spleef (list/arenas) &8-&e доступные арены
-    &c&l-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
-join:
-  alreadyIn: "&8[&cSpleef&8] &eВы уже на арене &c$arena&e!"
-  success: "&8[&cSpleef&8] &eВы присоединились к арене &c$arena&e. Игроков&8: &c$players&8/&c$max"
-leave:
-  notIn: "&8[&cSpleef&8] &eВы не участвуете в сплифе!"
-  success: "&8[&cSpleef&8] &eВы изгнаны из сплиф-кружка"
-arenas:
-  notExist: "&8[&cSpleef&8] &eАрены &c$arena &eне существует!"
-  notEnough: "&8[&cSpleef&8] &eВсе существующие арены заполнены!"
-  full: "&8[&cSpleef&8] &eНа арене &c$arena &eмаксимальное количество игроков &8(&cplayers/&cmax&8)"
-  header: "&8[&cSpleef&8] &eАрены &8(&c$freeArenasCount&8/&c$arenasCount&8):\n"
-  arena: "&8- &c$arena &8(&c$players&8/&c$max&8)"
-  freeArena: "&8- &e$arena &8(&a$players&8/&a$max&8)"
-  separator: "\n"
-end:
-  lose: |-
-    &8[&cSpleef&8] &eВы проиграли!
-    &eПопытаете удачу снова?
-    &c/spleef join
-  win: "&8[&cSpleef&8] &eВы победили! На ваш баланс зачислено &c$amount$"
-players:
-  notEnough: "&8[&cSpleef&8] &eНедостаточно игроков для начала игры!"
-  header: "&8[&cSpleef&8] &eИгроки на арене &c$arena &8(&c$players&8/&c$max&8):\n"
-  player: "&e- &c$player"
-  separator: "\n"
-wait: "&8[&cSpleef&8] &c$remain&e..."
-start: "&8[&cSpleef&8] &eИгра началась!"
-reload: "&8[&cSpleef&8] &eКонфиги успешно перезагружены!"
-noPermission: "&8[&cSpleef&8] &eУ вас нет прав на выполнение этой команды!"
-playerOnly: "&8[&cSpleef&8] &eДанное действие могут совершать только игроки!"
-illegalCommand: |-
-  &8[&cSpleef&8] &eВы не можете использовать команды во время игры!
-  &eЧтобы выйти из игры, введите
-  &c/spleef leave
+stuff:
+  prefix: "&8[&cSpleef&8]&e"
+  noPermission: "$prefix У вас нет прав на выполнение этой команды!"
+  playersOnly: "$prefix Данное действие могут совершать только игроки!"
+  unavailableCommand:  |-
+    $prefix Вы не можете использовать команды во время игры!
+    $prefix &eЧтобы выйти из игры, введите &c/spleef leave
+game:
+  notEnoughPlayers: "$prefix Недостаточно игроков для начала игры!"
+  countdown: "$prefix &c$countdown&e..."
+  start: "$prefix Игра началась!"
+  end:
+    lose: |-
+      $prefix Вы проиграли!
+      $prefix &eПопытаете удачу снова? &c/spleef join
+    win:
+      reward: "$prefix Вы победили! На ваш баланс зачислено &c$reward$"
+      noReward: "$prefix Вы победили!"
+commands:
+  general:
+    help:
+      player: |-
+        &c&l-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+        &cКоманды&8:
+        &e  /spleef join [arena] &8-&e участвовать в сплифе
+        &e  /spleef leave &8-&e не участвовать в сплифе
+        &e  /spleef players <arena> &8-&e количество участников сплифа
+        &e  /spleef (list/arenas) &8-&e доступные арены
+        &c&l-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+      admin: |-
+        &c&l-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+        &cКоманды&8:
+        &e  /spleef join [arena] &8-&e участвовать в сплифе
+        &e  /spleef leave &8-&e не участвовать в сплифе
+        &e  /spleef players <arena> &8-&e количество участников сплифа
+        &e  /spleef (list/arenas) &8-&e доступные арены
+        &c&l-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+        &cДля Админа&8:
+        &e  /spleef reload &8-&e перезагрузить конфиги
+        &e  /spleef add <arena> [params] &8-&e создать арену (в разработке)
+        &e  /spleef remove <arena> &8-&e удалить арену (в разработке)
+        # TODO
+        &c&l-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+      console: "Затычка; В будущем будет изменённая админская помощь"
+    arenas:
+      structure:
+        header: "$prefix Арены &8(&c$freeArenasCount&8/&c$arenasCount&8):\n"
+        item: "&8- &e$item &8(&c$playersCount&8/&c$maxPlayersCount&8)"
+        separator: "\n"
+    players:
+      structure:
+        header: "$prefix Игроки на арене &c$arena &8(&c$playersCount&8/&c$maxPlayersCount&8):\n"
+        item: "&e- &c$item"
+        separator: "\n"
+      fail:
+        arenaIsNotExist: "$prefix Арены &c$arena &eне существует!"
+  player:
+    join:
+      success: "Вы присоединились к арене &c$arena&e. Игроков&8: &c$playersCount&8/&c$maxPlayersCount"
+      fail:
+        alreadyIn: "$prefix Вы уже на арене &c$arena&e!"
+        arenaIsNotExist: "$prefix Арены &c$arena &eне существует!"
+        arenaIsFull: "$prefix На арене &c$arena &eмаксимальное количество игроков &8(&cplayersCount/&cmaxPlayersCount&8)"
+        allArenasAreFull: "$prefix Все существующие арены заполнены!"
+        unavailable: "$prefix Данная арена недоступна для вас."
+    leave:
+      success: "$prefix Вы изгнаны из сплиф-кружка"
+      fail:
+        notIn: "$prefix Вы не участвуете в сплифе!"
+  admin:
+    reload: "$prefix Конфиги успешно перезагружены!"
 ```
 ##### Шаблонные переменные
 В конфигах локализации можно использовать шаблонные переменные. Они всегда начинаются с доллара ($).
 
-###### Переменные арены (универсальные):
+###### Переменные арены
+Применимы везде, где речь идёт о конкретной арене. 
 
-имя           | значение
----           | ---
-players       | количество игроков
-min           | минимальное количество игроков
-max           | максимальное количество игроков
-remain        | количество секунд до старта
-arena, region | имя защищённого региона WorldGuard
-amount        | размер денежного приз для победившего
+имя             | значение
+---             | ---
+playersCount    | количество игроков
+minPlayersCount | минимальное количество игроков
+maxPlayersCount | максимальное количество игроков
+countdown       | количество секунд до старта
+arena, region   | имя защищённого региона WorldGuard
+reward          | размер денежного приз для победившего
 
-###### Уникальные переменные:
-имя             | параметр       | значение
----             | ---            | ---
-player          | players.player | никнейм игрока
-arenasCount     | arenas.header  | количество арен
-freeArenasCount | arenas.header  | количество свободных арен
+###### Уникальные переменные
+имя             | параметр                                  | значение
+---             | ---                                       | ---
+arenasCount     | commands.general.arenas.structure.header  | количество арен
+freeArenasCount | commands.general.arenas.structure.header  | количество свободных арен
 
+###### Переменные структуры
+Применимы в конструкциях следующего вида:
+```yaml
+structure:
+  header: ...
+  item: ...
+  separator: ...
+```
+
+имя  | значение
+---  | ---
+item | имя перечисляемого предмета
+
+###### Универсальные переменные
+Применимы во всех параметрах (кроме их самих). Задаются пользователем.
+
+имя    | значение
+---    | ---
+prefix | Префикс плагина
+
+##### Форматирование текста
 В качестве спецсимвола для цветовых кодов используется амперсанд (&) или параграф (§). Может использоваться как цветовое, так и текстовое форматирование.
 
 ![Цветовые коды](/images/colorCodes.png)
 ![Коды для форматирования текста](/images/formatCodes.png)
-## EN
-Spleef minigame plugin for minecraft that works with WorldGuard  // TODO
