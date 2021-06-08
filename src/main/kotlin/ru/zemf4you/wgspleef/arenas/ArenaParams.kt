@@ -19,8 +19,8 @@ class ArenaParams(val regionName: String, map: Map<String, Any>) {
 
     // TODO:
     //  You need to init params as a human
-    val minPlayers: Int
-    val maxPlayers: Int
+    val minPlayersCount: Int
+    val maxPlayersCount: Int
     val blockToBreak: Material
     val startItem: Material
     private lateinit var worldName: String
@@ -36,20 +36,20 @@ class ArenaParams(val regionName: String, map: Map<String, Any>) {
             startCoords.getValue("z")
         )
     }
-    val startCd: Int
-    val startCdReset: Boolean
-    val winAmount: Double
+    val startCountdown: Int
+    val startCountdownReset: Boolean
+    val reward: Double
 
     val region: ProtectedRegion
     val defaultInventoryData: String
 
     init {
         try {
-            this.minPlayers = map["minPlayers"].toString().toInt()
-            if (this.minPlayers < 2)
+            this.minPlayersCount = map["minPlayersCount"].toString().toInt()
+            if (this.minPlayersCount < 2)
                 throw InvalidArena("Minimum number of players must be greater than 2 in arena $regionName!")
-            this.maxPlayers = map["maxPlayers"].toString().toInt()
-            if (this.maxPlayers < this.minPlayers)
+            this.maxPlayersCount = map["maxPlayersCount"].toString().toInt()
+            if (this.maxPlayersCount < this.minPlayersCount)
                 throw InvalidArena(
                     "Maximum number of players must be greater than or equal" +
                             "to the minimum number of players in arena $regionName!"
@@ -60,15 +60,17 @@ class ArenaParams(val regionName: String, map: Map<String, Any>) {
                 ?: throw InvalidArena("Invalid start item in arena $regionName!")
             this.worldName = map["world"].toString()
             this.startCoords = map.getValue("startCoords").cast()
-            this.startCd = map["startCd"].toString().toInt()
-            this.startCdReset = map["startCdReset"].toString() == "true"
-            this.winAmount = map["winAmount"]?.toString()?.toInt()?.toDouble() ?: 0.0
+            this.startCountdown = map["startCountdown"].toString().toInt()
+            this.startCountdownReset = map["startCountdownReset"].toString() == "true"
+            this.reward = map["reward"]?.toString()?.toInt()?.toDouble() ?: 0.0
+            if (this.reward < 0)
+                throw InvalidArena("reward must be greater than zero!")
 
             region = Regions.getRegionsName(world, regionName)
                 ?: throw InvalidArena("Arena $regionName not exists!")
             region.setFlag(DefaultFlag.INTERACT, StateFlag.State.ALLOW)  // IMPORTANT! for breaking blocks with tools
 
-            defaultInventoryData = InventoryManager.createInventory(listOf(startItem))!!.save()
+            defaultInventoryData = InventoryManager.createInventory(startItem)!!.save()
         } catch (e: Throwable) {
             throw InvalidArena(e.message)
         }

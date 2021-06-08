@@ -29,27 +29,23 @@ class Arena(private val plugin: SpleefPlugin, val params: ArenaParams) {
 
     val blocksToRestore = mutableListOf<Block>()
 
-    var cd = params.startCd
+    var countdown = params.startCountdown
         private set
 
     private var task = {
         if (free) {
-            if (players.size >= params.minPlayers) {
-                broadcast(locale.wait.template(this@Arena))
-                cd--
-                if (cd == 0) {
+            if (players.size >= params.minPlayersCount) {
+                broadcast(locale.game.countdown.template(this@Arena))
+                countdown--
+                if (countdown == 0) {
                     start()
-                    broadcast(locale.start.template(this@Arena))
+                    broadcast(locale.game.countdown.template(this@Arena))
                 }
             } else {
                 resetCd()
             }
-            // Fix minecraft bug
-//            for (player in players)
-//                if (player.location.y < params.startLocation.y)
-//                    player.teleport(params.startLocation)
         } else {
-            for (player in players.clone())  // just copy
+            for (player in players.clone())  // just copy because we can change original players in loop
                 if (params.regionName !in Regions.getRegionsName(player))
                     player.sendMessage(leave(player))
         }
@@ -58,7 +54,7 @@ class Arena(private val plugin: SpleefPlugin, val params: ArenaParams) {
     private val timer = plugin.server.scheduler.runTaskTimer(plugin, task, 0, 20)
 
     private fun resetCd() {
-        cd = params.startCd
+        countdown = params.startCountdown
     }
 
     // TODO:
@@ -86,22 +82,22 @@ class Arena(private val plugin: SpleefPlugin, val params: ArenaParams) {
 
     fun join(player: Player): String {
         if (player in players)
-            return locale.join.alreadyIn.template(this)
-        if (players.size >= params.maxPlayers)
-            return locale.arenas.full.template(this)
-        if (params.startCdReset)
+            return locale.commands.player.join.fail.alreadyIn.template(this)
+        if (players.size >= params.maxPlayersCount)
+            return locale.commands.player.join.fail.arenaIsFull.template(this)
+        if (params.startCountdownReset)
             resetCd()
         players.add(player)
-        return locale.join.success.template(this)
+        return locale.commands.player.join.success.template(this)
     }
 
     fun leave(player: Player): String {
         if (player !in players)
-            return locale.leave.notIn.template(this)
-        if (free && players.size == params.minPlayers)
-            broadcast(locale.players.notEnough.template(this))
+            return locale.commands.player.leave.fail.notIn.template(this)
         players.remove(player)
-        return locale.leave.success.template(this)
+        if (free && players.size == params.minPlayersCount - 1)
+            broadcast(locale.game.notEnoughPlayers.template(this))
+        return locale.commands.player.leave.success.template(this)
     }
 
     fun purge() {
@@ -113,17 +109,20 @@ class Arena(private val plugin: SpleefPlugin, val params: ArenaParams) {
     fun win(player: Player): String? {
         if (player !in players)
             return null
-        Dependencies.vaultEconomy?.depositPlayer(player, params.winAmount)
         EventsManager.call(SpleefPlayerWinEvent(this, player))
         stop()
-        return locale.end.win.template(this)
+        Dependencies.vaultEconomy?.let { economy ->
+            economy.depositPlayer(player, params.reward)
+            return locale.game.end.win.reward.template(this)
+        }
+        return locale.game.end.win.noReward.template(this)
     }
 
     fun lose(player: Player): String? {
         if (player !in players)
             return null
         players.remove(player)
-        return locale.end.lose.template(this)
+        return locale.game.end.lose.template(this)
     }
 
     fun restoreBlocks() {

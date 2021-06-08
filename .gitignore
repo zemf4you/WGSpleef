@@ -1,6 +1,7 @@
 *.iml
-out
-target
-.idea
+/out
+/target
+/.idea
 *.sh
-src/main/resources
+*.xml
+!pom.xml

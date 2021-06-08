@@ -24,7 +24,7 @@ class SpleefPlugin : JavaPlugin() {
         config.reload()
         arenaManager.reload()
         localization = Localization(this, config.getString("lang"))
-        return localization.reload
+        return localization.commands.admin.reload
     }
 
     override fun onEnable() {

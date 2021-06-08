@@ -20,6 +20,9 @@ object InventoryManager {
     fun createInventory(): Inventory =
         Bukkit.createInventory(null, InventoryType.PLAYER)
 
+    fun createInventory(vararg materials: Material): Inventory? =
+        createInventory(materials.toList())
+
     fun createInventory(materials: List<Material>): Inventory? {
         if (materials.size !in 0..41)
             return null
