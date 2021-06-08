@@ -22,6 +22,21 @@
                       <FeaturePluginData displayName="Plugin" pluginName="Plugin DevKit" pluginId="DevKit" bundled="true" />
                     </value>
                   </entry>
+                  <entry key="AndroidJUnit">
+                    <value>
+                      <FeaturePluginData displayName="Android JUnit" pluginName="Android" pluginId="org.jetbrains.android" bundled="true" />
+                    </value>
+                  </entry>
+                  <entry key="AndroidRunConfigurationType">
+                    <value>
+                      <FeaturePluginData displayName="Android App" pluginName="Android" pluginId="org.jetbrains.android" bundled="true" />
+                    </value>
+                  </entry>
+                  <entry key="AndroidTestRunConfigurationType">
+                    <value>
+                      <FeaturePluginData displayName="Android Instrumented Tests" pluginName="Android" pluginId="org.jetbrains.android" bundled="true" />
+                    </value>
+                  </entry>
                   <entry key="AntRunConfiguration">
                     <value>
                       <FeaturePluginData displayName="Ant Target" pluginName="Ant" pluginId="AntSupport" bundled="true" />
@@ -47,6 +62,11 @@
                       <FeaturePluginData displayName="Attach to Node.js/Chrome" pluginName="JavaScript Debugger" pluginId="JavaScriptDebugger" bundled="true" />
                     </value>
                   </entry>
+                  <entry key="ComposePreviewRunConfiguration">
+                    <value>
+                      <FeaturePluginData displayName="Compose Preview" pluginName="Android" pluginId="org.jetbrains.android" bundled="true" />
+                    </value>
+                  </entry>
                   <entry key="CompoundRunConfigurationType">
                     <value>
                       <FeaturePluginData displayName="Compound" pluginName="IDEA CORE" pluginId="com.intellij" bundled="true" />
@@ -60,6 +80,11 @@
                   <entry key="DatabaseScript">
                     <value>
                       <FeaturePluginData displayName="Database Script" pluginName="Database Tools and SQL" pluginId="com.intellij.database" bundled="true" />
+                    </value>
+                  </entry>
+                  <entry key="DjangoTestsConfigurationType">
+                    <value>
+                      <FeaturePluginData displayName="Django tests" pluginName="Python" pluginId="Pythonid" />
                     </value>
                   </entry>
                   <entry key="FirefoxRemoteDebugType">
@@ -139,7 +164,7 @@
                   </entry>
                   <entry key="JetRunConfigurationType">
                     <value>
-                      <FeaturePluginData displayName="Kotlin" pluginName="Kotlin" pluginId="org.jetbrains.kotlin" bundled="true" />
+                      <FeaturePluginData displayName="Kotlin" pluginName="Kotlin" pluginId="org.jetbrains.kotlin" />
                     </value>
                   </entry>
                   <entry key="JettyConfiguration">
@@ -149,12 +174,12 @@
                   </entry>
                   <entry key="KotlinJavaScriptTestRunnerProtractor">
                     <value>
-                      <FeaturePluginData displayName="Protractor (Kotlin)" pluginName="org.jetbrains.kotlin" pluginId="org.jetbrains.kotlin" bundled="true" />
+                      <FeaturePluginData displayName="Protractor (Kotlin)" pluginName="org.jetbrains.kotlin" pluginId="org.jetbrains.kotlin" />
                     </value>
                   </entry>
                   <entry key="KotlinStandaloneScriptRunConfigurationType">
                     <value>
-                      <FeaturePluginData displayName="Kotlin script" pluginName="Kotlin" pluginId="org.jetbrains.kotlin" bundled="true" />
+                      <FeaturePluginData displayName="Kotlin script" pluginName="Kotlin" pluginId="org.jetbrains.kotlin" />
                     </value>
                   </entry>
                   <entry key="MavenRunConfiguration">
@@ -180,6 +205,41 @@
                   <entry key="NodeunitConfigurationType">
                     <value>
                       <FeaturePluginData displayName="Nodeunit" pluginName="Node.js" pluginId="NodeJS" bundled="true" />
+                    </value>
+                  </entry>
+                  <entry key="PyBehaveRunConfigurationType">
+                    <value>
+                      <FeaturePluginData displayName="Behave" pluginName="Pythonid" pluginId="Pythonid" />
+                    </value>
+                  </entry>
+                  <entry key="PyRemoteDebugConfigurationType">
+                    <value>
+                      <FeaturePluginData displayName="Python Debug Server" pluginName="Python" pluginId="Pythonid" />
+                    </value>
+                  </entry>
+                  <entry key="Python.AppEngineServer">
+                    <value>
+                      <FeaturePluginData displayName="App Engine server" pluginName="Pythonid" pluginId="Pythonid" />
+                    </value>
+                  </entry>
+                  <entry key="Python.DjangoServer">
+                    <value>
+                      <FeaturePluginData displayName="Django Server" pluginName="Python" pluginId="Pythonid" />
+                    </value>
+                  </entry>
+                  <entry key="Python.FlaskServer">
+                    <value>
+                      <FeaturePluginData displayName="Flask server" pluginName="Python" pluginId="Pythonid" />
+                    </value>
+                  </entry>
+                  <entry key="Python.PyramidServer">
+                    <value>
+                      <FeaturePluginData displayName="Pyramid server" pluginName="Python" pluginId="Pythonid" />
+                    </value>
+                  </entry>
+                  <entry key="PythonConfigurationType">
+                    <value>
+                      <FeaturePluginData displayName="Python" pluginName="Python" pluginId="Pythonid" />
                     </value>
                   </entry>
                   <entry key="QuarkusRunConfigurationType">
@@ -217,6 +277,11 @@
                       <FeaturePluginData displayName="Swagger Codegen" pluginName="OpenAPI Specifications" pluginId="com.intellij.swagger" bundled="true" />
                     </value>
                   </entry>
+                  <entry key="TORNADOFX_RUNCONFIGURATION">
+                    <value>
+                      <FeaturePluginData displayName="TornadoFX" pluginName="TornadoFX" pluginId="no.tornado.tornadofx.idea" />
+                    </value>
+                  </entry>
                   <entry key="TSqltConfigurationType">
                     <value>
                       <FeaturePluginData displayName="tSQLt Test" pluginName="Database Tools and SQL" pluginId="com.intellij.database" bundled="true" />
@@ -230,6 +295,11 @@
                   <entry key="TomeeConfiguration">
                     <value>
                       <FeaturePluginData displayName="TomEE Server" pluginName="Tomcat and TomEE" pluginId="Tomcat" bundled="true" />
+                    </value>
+                  </entry>
+                  <entry key="Tox">
+                    <value>
+                      <FeaturePluginData displayName="tox" pluginName="Python" pluginId="Pythonid" />
                     </value>
                   </entry>
                   <entry key="UtPlSqlConfigurationType">
@@ -277,6 +347,11 @@
                       <FeaturePluginData displayName="Mocha" pluginName="Node.js" pluginId="NodeJS" bundled="true" />
                     </value>
                   </entry>
+                  <entry key="tests">
+                    <value>
+                      <FeaturePluginData displayName="Python tests" pluginName="Python" pluginId="Pythonid" />
+                    </value>
+                  </entry>
                 </map>
               </option>
             </FeaturePluginsList>
@@ -292,9 +367,19 @@
                       <FeaturePluginData displayName="AspectJ" pluginName="AspectJ" pluginId="com.intellij.aspectj" bundled="true" />
                     </value>
                   </entry>
+                  <entry key="Python">
+                    <value>
+                      <FeaturePluginData displayName="Python" pluginName="Pythonid" pluginId="Pythonid" />
+                    </value>
+                  </entry>
                   <entry key="Spring">
                     <value>
                       <FeaturePluginData displayName="Spring" pluginName="Spring" pluginId="com.intellij.spring" bundled="true" />
+                    </value>
+                  </entry>
+                  <entry key="TornadoFX">
+                    <value>
+                      <FeaturePluginData displayName="TornadoFX" pluginName="TornadoFX" pluginId="no.tornado.tornadofx.idea" />
                     </value>
                   </entry>
                   <entry key="WebServicesClient">
@@ -302,14 +387,49 @@
                       <FeaturePluginData displayName="WebServices Client" pluginName="Java EE: Web Services (JAX-WS)" pluginId="com.jetbrains.jax.ws" bundled="true" />
                     </value>
                   </entry>
+                  <entry key="android">
+                    <value>
+                      <FeaturePluginData displayName="Android" pluginName="Android" pluginId="org.jetbrains.android" bundled="true" />
+                    </value>
+                  </entry>
+                  <entry key="android-gradle">
+                    <value>
+                      <FeaturePluginData displayName="Android-Gradle" pluginName="Android" pluginId="org.jetbrains.android" bundled="true" />
+                    </value>
+                  </entry>
+                  <entry key="apk">
+                    <value>
+                      <FeaturePluginData displayName="APK" pluginName="Android" pluginId="org.jetbrains.android" bundled="true" />
+                    </value>
+                  </entry>
+                  <entry key="buildout-python">
+                    <value>
+                      <FeaturePluginData displayName="Buildout Support" pluginName="Python" pluginId="Pythonid" />
+                    </value>
+                  </entry>
+                  <entry key="django">
+                    <value>
+                      <FeaturePluginData displayName="Django" pluginName="Python" pluginId="Pythonid" />
+                    </value>
+                  </entry>
                   <entry key="ejb">
                     <value>
                       <FeaturePluginData displayName="EJB" pluginName="Java EE: Enterprise Java Beans (EJB)" pluginId="com.intellij.javaee.ejb" bundled="true" />
                     </value>
                   </entry>
+                  <entry key="google-appengine-python">
+                    <value>
+                      <FeaturePluginData displayName="Google App Engine (Python)" pluginName="Pythonid" pluginId="Pythonid" />
+                    </value>
+                  </entry>
                   <entry key="hibernate">
                     <value>
                       <FeaturePluginData displayName="Hibernate" pluginName="Hibernate" pluginId="com.intellij.hibernate" bundled="true" />
+                    </value>
+                  </entry>
+                  <entry key="java-gradle">
+                    <value>
+                      <FeaturePluginData displayName="Java-Gradle" pluginName="Android" pluginId="org.jetbrains.android" bundled="true" />
                     </value>
                   </entry>
                   <entry key="javaeeApplication">
@@ -324,7 +444,12 @@
                   </entry>
                   <entry key="kotlin-language">
                     <value>
-                      <FeaturePluginData displayName="Kotlin" pluginName="Kotlin" pluginId="org.jetbrains.kotlin" bundled="true" />
+                      <FeaturePluginData displayName="Kotlin" pluginName="Kotlin" pluginId="org.jetbrains.kotlin" />
+                    </value>
+                  </entry>
+                  <entry key="native-android-gradle">
+                    <value>
+                      <FeaturePluginData displayName="Native-Android-Gradle" pluginName="Android" pluginId="org.jetbrains.android" bundled="true" />
                     </value>
                   </entry>
                   <entry key="web">
