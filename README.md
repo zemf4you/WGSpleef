@@ -1,3 +1,6 @@
+# Archived!
+Please contact me if you really need something like this. I will consider this as a pet project and write something cool already
+
 # WGSpleef
 ## RU
 Плагин на сплиф для майнкрафта, который работает с WorldGuard. Заточен на сервера с выживанием.
