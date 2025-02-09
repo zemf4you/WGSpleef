@@ -7,7 +7,7 @@ object Util {
     // TODO:
     //  Seems like something bad, but @irisism said that it`s good idea
     @Suppress("UNCHECKED_CAST", "NOTHING_TO_INLINE")
-    inline fun <T>Any.cast() = this as T
+    inline fun <T> Any.cast() = this as T
 
     fun ByteArray.toBase64(): String =
         Base64.getEncoder().encodeToString(this)

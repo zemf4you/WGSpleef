@@ -6,7 +6,7 @@ import org.bukkit.event.Event
 import org.bukkit.event.HandlerList
 import ru.zemf4you.wgspleef.arenas.Arena
 
-class SpleefStopEvent(val arena: Arena): Event() {
+class SpleefStopEvent(val arena: Arena) : Event() {
 
     override fun getHandlers() = HANDLERS
 

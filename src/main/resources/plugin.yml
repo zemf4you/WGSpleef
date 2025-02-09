@@ -1,0 +1,12 @@
+main: ru.zemf4you.wgspleef.SpleefPlugin
+name: WGSpleef
+version: '1.0'
+description: Spleef plugin with regions from WG
+load: POSTWORLD
+author: zemf4you
+website: vk.com/zemf4you
+depend: [ WorldGuard, WorldEdit, Vault ]
+commands:
+  spleef:
+    description: Spleef command
+    usage: /spleef

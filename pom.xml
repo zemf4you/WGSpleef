@@ -15,34 +15,39 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <kotlin.code.style>official</kotlin.code.style>
         <kotlin.compiler.jvmTarget>1.8</kotlin.compiler.jvmTarget>
-        <kotlin.version>1.4.31</kotlin.version>
+        <kotlin.version>1.9.25</kotlin.version>
         <serialization.version>1.1.0</serialization.version>
     </properties>
 
     <repositories>
+        <!-- Maven Central (общие артефакты, включая Kotlin) -->
         <repository>
             <id>mavenCentral</id>
             <url>https://repo1.maven.org/maven2/</url>
         </repository>
+
+        <!-- JitPack (Vault и пр. из GitHub) -->
         <repository>
             <id>jitpack.io</id>
             <url>https://jitpack.io</url>
         </repository>
+
+        <!-- EngineHub (WorldGuard, WorldEdit и т.д.) -->
         <repository>
-            <id>sk89q</id>
-            <url>https://maven.sk89q.com/repo/</url>
+            <id>enginehub</id>
+            <url>https://maven.enginehub.org/repo/</url>
         </repository>
-        <repository>
-            <id>sk89q</id>
-            <url>https://maven.sk89q.com/artifactory/repo/</url>
-        </repository>
+
+        <!-- Spigot (spigot-api, bukkit) -->
         <repository>
             <id>spigot-repo</id>
             <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
         </repository>
+
+        <!-- PaperMC (paper-api). Старый "destroystokyo" лучше заменить на официальный репозиторий Paper -->
         <repository>
-            <id>destroystokyo-repo</id>
-            <url>https://repo.destroystokyo.com/repository/maven-public//</url>
+            <id>papermc-repo</id>
+            <url>https://repo.papermc.io/repository/maven-public/</url>
         </repository>
     </repositories>
 
@@ -80,18 +85,20 @@
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib-jdk8</artifactId>
-            <version>1.4.31</version>
+            <version>${kotlin.version}</version>
         </dependency>
         <dependency>
             <groupId>com.sk89q</groupId>
             <artifactId>worldedit</artifactId>
             <version>5.5.8</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
     <build>
         <sourceDirectory>src/main/kotlin</sourceDirectory>
         <plugins>
+            <!-- Плагин Kotlin для компиляции -->
             <plugin>
                 <groupId>org.jetbrains.kotlin</groupId>
                 <artifactId>kotlin-maven-plugin</artifactId>
@@ -104,19 +111,28 @@
                             <goal>compile</goal>
                         </goals>
                     </execution>
+                </executions>
+            </plugin>
+
+
+            <!-- Плагин для шейдинга (включения kotlin-stdlib в jar) -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.6.0</version>
+                <executions>
                     <execution>
-                        <id>test-compile</id>
-                        <phase>test-compile</phase>
+                        <phase>package</phase>
                         <goals>
-                            <goal>test-compile</goal>
+                            <goal>shade</goal>
                         </goals>
+                        <configuration>
+                            <createDependencyReducedPom>true</createDependencyReducedPom>
+                            <shadedArtifactAttached>true</shadedArtifactAttached>
+                            <shadedArtifactClassifier>all</shadedArtifactClassifier>
+                        </configuration>
                     </execution>
                 </executions>
-                <configuration>
-                    <compilerPlugins>
-                        <plugin>kotlinx-serialization</plugin>
-                    </compilerPlugins>
-                </configuration>
             </plugin>
         </plugins>
     </build>

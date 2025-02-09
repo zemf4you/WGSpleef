@@ -42,6 +42,7 @@ class SpleefCommand(private val plugin: SpleefPlugin) : CommandExecutor {
                         ?: locale.commands.player.join.fail.allArenasAreFull
                 }
             }
+
             else -> {
                 val regionName = args[0]
                 when (sender) {
@@ -78,6 +79,7 @@ class SpleefCommand(private val plugin: SpleefPlugin) : CommandExecutor {
                         ?.let { arena -> locale.commands.general.players.toString(arena) }
                 }
             }
+
             else -> {
                 val regionName = args[0]
                 when (val arena = plugin.arenaManager.findArena(regionName)) {
@@ -85,6 +87,7 @@ class SpleefCommand(private val plugin: SpleefPlugin) : CommandExecutor {
                         "arena" to regionName,
                         "region" to regionName
                     )
+
                     else -> locale.commands.general.players.toString(arena)
                 }
             }

@@ -9,7 +9,7 @@ import org.bukkit.potion.PotionEffect
 import ru.zemf4you.wgspleef.players.InventoryManager.save
 
 
-class SavedPlayerAttributes(player: Player): PlayerAttributes {
+class SavedPlayerAttributes(player: Player) : PlayerAttributes {
     override val location: Location = player.location
     override val gameMode: GameMode = player.gameMode
     override val exp: Float = player.exp

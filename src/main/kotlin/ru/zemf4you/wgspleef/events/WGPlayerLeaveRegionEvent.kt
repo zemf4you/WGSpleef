@@ -8,7 +8,7 @@ import org.bukkit.event.Event
 import org.bukkit.event.HandlerList
 
 // TODO: use this
-class WGPlayerLeaveRegionEvent(val region: ProtectedRegion, val player: Player): Event() {
+class WGPlayerLeaveRegionEvent(val region: ProtectedRegion, val player: Player) : Event() {
 
     override fun getHandlers() = HANDLERS
 

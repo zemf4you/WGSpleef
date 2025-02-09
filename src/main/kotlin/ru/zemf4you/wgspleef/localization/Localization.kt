@@ -6,7 +6,6 @@ import org.bukkit.ChatColor
 import org.bukkit.entity.Player
 import ru.zemf4you.wgspleef.SpleefPlugin
 import ru.zemf4you.wgspleef.arenas.Arena
-import ru.zemf4you.wgspleef.arenas.ArenaManager
 import ru.zemf4you.wgspleef.configs.Config
 
 class Localization(private val plugin: SpleefPlugin, val lang: String = "ru") {
@@ -91,9 +90,11 @@ class Localization(private val plugin: SpleefPlugin, val lang: String = "ru") {
             inner class Players {
                 val structure = Structure("commands.general.players.structure")
                 val fail = Fail()
+
                 inner class Fail {
                     val arenaIsNotExist = getString("commands.general.players.fail.arenaIsNotExist")
                 }
+
                 fun toString(arena: Arena): String {
                     return structure.header.template(arena) +
                             arena.players.joinToString(structure.separator) {
@@ -135,25 +136,13 @@ class Localization(private val plugin: SpleefPlugin, val lang: String = "ru") {
         }
     }
 
-    val stuff: Stuff
-    val game: Game
-    val commands: Commands
+    val stuff: Stuff = Stuff()
+    val game: Game = Game()
+    val commands: Commands = Commands()
 
-    init {
-        try {
-            stuff = Stuff()
-            game = Game()
-            commands = Commands()
-        } catch (e: Throwable) {
-            throw InvalidLocalization(e.message)
-        }
-    }
-
-    val globalVariables= arrayOf(
+    fun getString(path: String) = config.getMessage(path).template(
         "prefix" to config.getMessage("stuff.prefix")
     )
-
-    fun getString(path: String) = config.getMessage(path).template(*globalVariables)
 
     companion object {
 

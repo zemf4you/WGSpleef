@@ -1,7 +1,7 @@
 *.iml
-/out
-/target
-/.idea
+out
+target
+.idea
 *.sh
 *.xml
-!pom.xml
+pom.xml

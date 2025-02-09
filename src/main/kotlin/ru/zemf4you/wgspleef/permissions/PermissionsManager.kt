@@ -1,6 +1,5 @@
 package ru.zemf4you.wgspleef.permissions
 
-import org.bukkit.entity.Player
 import org.bukkit.permissions.Permissible
 
 object PermissionsManager {
