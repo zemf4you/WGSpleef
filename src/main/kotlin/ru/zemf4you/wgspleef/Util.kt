@@ -15,13 +15,4 @@ object Util {
     fun String.fromBase64ToByteArray(): ByteArray =
         Base64.getDecoder().decode(this)
 
-    fun <T> Array<out T>.isPatternFor(other: Array<out T>): Boolean {
-        if (this.size != other.size)
-            return false
-        for (i in this.indices)
-            if (this[i] != null && this[i] != other[i])
-                return false
-        return true
-    }
-
 }
