@@ -129,7 +129,6 @@
                         <configuration>
                             <createDependencyReducedPom>true</createDependencyReducedPom>
                             <shadedArtifactAttached>true</shadedArtifactAttached>
-                            <shadedArtifactClassifier>all</shadedArtifactClassifier>
                         </configuration>
                     </execution>
                 </executions>
